@@ -31,6 +31,7 @@ def callback(ch, method, properties, body):
     #insert_into_db(val=body)
     #print(f" [x] Received %r {body}")
     print(f" [x] Received {body}")
+    ch.basic_ack(delivery_tag = method.delivery_tag) # <- 每次成功 cossume 都會 popout
 
 channel.basic_consume('hello',callback)
 
