@@ -28,7 +28,7 @@ def insert_into_db(val):
 print(' [*] Waiting for messages. To exit press CTRL+C')
 def callback(ch, method, properties, body):
     body = body.decode("utf-8")
-    #insert_into_db(val=body)
+    insert_into_db(val=body)
     #print(f" [x] Received %r {body}")
     print(f" [x] Received {body}")
     ch.basic_ack(delivery_tag = method.delivery_tag) # <- 每次成功 cossume 都會 popout
