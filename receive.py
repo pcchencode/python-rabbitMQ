@@ -8,7 +8,7 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost')
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
-
+#channel.queue_purge(queue='hello') # 清空 message queue
 
 def insert_into_db(val):
     sql = f"""
@@ -26,15 +26,14 @@ def insert_into_db(val):
 
 
 print(' [*] Waiting for messages. To exit press CTRL+C')
-
-
 def callback(ch, method, properties, body):
     body = body.decode("utf-8")
-    insert_into_db(val=body)
+    #insert_into_db(val=body)
     #print(f" [x] Received %r {body}")
     print(f" [x] Received {body}")
 
 channel.basic_consume('hello',callback)
 
 # 每跑一次 reveive.py 都會重新插一次，應該要每跑一次都把 message queue 給清空
+# consume 沒有把 queue pop out, 很奇怪...
 channel.start_consuming()
