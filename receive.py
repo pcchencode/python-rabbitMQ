@@ -1,5 +1,6 @@
 import pika
 import pymysql
+import random
 conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db= 'test', charset='utf8')
 cursor = conn.cursor()
 
@@ -22,6 +23,11 @@ def insert_into_db(val):
         conn.rollback()
         print(e)
     
+    # 隨機中斷連線，模擬塞資料塞到一半斷線
+    brk = random.randint(1, 10)
+    if brk==5:
+        print("opps! something wrong, byebye~~")
+        conn.close()
     return
 
 
