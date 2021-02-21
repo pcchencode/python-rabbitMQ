@@ -24,7 +24,7 @@ for i in range(1,100000):
     sha_val = m.hexdigest()
 
     sql = f"""
-    INSERT INTO test.tmp(`val`) VALUES ('{sha_val}')
+    INSERT INTO test.tb_order(`user_id`) VALUES ('{sha_val}')
     """
     print(sql)
     #continue

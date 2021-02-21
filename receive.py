@@ -13,7 +13,7 @@ channel.queue_declare(queue='hello')
 
 def insert_into_db(val):
     sql = f"""
-    INSERT INTO test.tmp(`val`) VALUES ('{val}')
+    INSERT INTO test.tb_order(`user_id`) VALUES ('{val}')
     """
     print(sql)
     try:
